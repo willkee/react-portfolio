@@ -18,12 +18,12 @@ function Login() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErrors([]);
-		return dispatch(sessionActions.login({ email, password })).catch(
-			async (res) => {
+		return dispatch(sessionActions.login({ email, password }))
+			.then(() => dispatch(hideModal()))
+			.catch(async (res) => {
 				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
-			}
-		);
+			});
 	};
 
 	return (
