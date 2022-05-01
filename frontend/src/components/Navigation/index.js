@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import ProfileButton from "./ProfileButton";
+import NavDropdown from "./Dropdown";
 import { currentModal, showModal } from "../../store/modal";
 import Login from "../Login";
 import "./Navigation.css";
@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 
-	const displayLoginForm = () => {
+	const showLogin = () => {
 		dispatch(currentModal(Login));
 		dispatch(showModal());
 	};
@@ -22,9 +22,9 @@ function Navigation({ isLoaded }) {
 					Home
 				</NavLink>
 				{isLoaded && sessionUser ? (
-					<ProfileButton />
+					<NavDropdown />
 				) : (
-					<button onClick={displayLoginForm}>Log In</button>
+					<button onClick={showLogin}>Log In</button>
 				)}
 			</li>
 		</ul>
